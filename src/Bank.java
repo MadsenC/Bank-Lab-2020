@@ -49,21 +49,32 @@ public class Bank
     }
 
     public void checkingWithdrawal(double amount) {
-        if (amount > checkingBal)
-            System.out.println("Insufficient Funds!  Transaction Refused!\n");
-        else
+        if (amount <= checkingBal) {
             checkingBal -= amount;
+        } else if (amount <= checkingBal + savingsBal) {
+            double Temp = amount - checkingBal;
+            checkingBal = 0.0;
+            savingsBal = savingsBal - Temp;
+            System.out.println("\nOverdraft Protection: $" + Temp + " transferred from Savings to Checking.\n");
+            /*
+            So sue.checkingWithdraw(1000) and sue only has 600 in checkingBal and 1000 in savingBal, it will remove the 600, and we will get the
+            remaning amount of the 1000 - 600 = 400 and subtract savingBal by 4000
+
+            */
+        } else {
+            System.out.println("Insufficient Funds!  Transaction Refused!\n");
+        }
     }
 
     public void savingsWithdrawal(double amount) {
-        if (amount > savingsBal)
+        if (amount >= savingsBal)
             System.out.println("Insufficient Funds!  Transaction Refused!\n");
         else
             savingsBal -= amount;
     }
 
     public void transferToChecking(double amount) {
-        if (amount > savingsBal) {
+        if (amount >= savingsBal) {
             System.out.println("Insufficient Funds!  Transaction Refused!\n");
         }
         else {
@@ -73,7 +84,7 @@ public class Bank
     }
 
     public void transferToSavings(double amount) {
-        if (amount > checkingBal) {
+        if (amount >= checkingBal) {
             System.out.println("Insufficient Funds!  Transaction Refused!\n");
         }
         else {
