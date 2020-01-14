@@ -57,7 +57,8 @@ public class Bank
             savingsBal = savingsBal - Temp;
             System.out.println("\nOverdraft Protection: $" + Temp + " transferred from Savings to Checking.\n");
         } else {
-            System.out.println("Insufficient Funds!  Transaction Refused!\n");
+            System.out.println("Insufficient Funds:  Check returned.  $40 fee assessed.\n");
+            checkingBal -= 40;
         }
     }
 
